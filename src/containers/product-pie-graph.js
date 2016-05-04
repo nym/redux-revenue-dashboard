@@ -4,21 +4,21 @@ import { selectProduct } from '../actions/index';
 import { bindActionCreators } from 'redux';
 
 let groupBy = function(xs, key) {
-  return xs.reduce(function(rv, x) {
-    (rv[x[key]] = rv[x[key]] || []).push(x);
-    return rv;
-  }, {});
+	return xs.reduce(function(rv, x) {
+		(rv[x[key]] = rv[x[key]] || []).push(x);
+		return rv;
+	}, {});
 };
 
 export default class ProductPieGraph extends Component {
 	renderList() {
 		let filter = this.props.year ? this.props.year.year : 'all';
 		let filtered = this.props.products.filter(product => {
-	        	if (filter === 2013) return (product.year == 2013);
-	        	if (filter === 2012) return (product.year == 2012);
-	        	if (filter === 'all') return true;
-	        	return product;
-	    });
+				if (filter === 2013) return (product.year == 2013);
+				if (filter === 2012) return (product.year == 2012);
+				if (filter === 'all') return true;
+				return product;
+		});
 		let grouped = groupBy(filtered, "product");
 		let groupedArray = [];
 		Object.keys(grouped).forEach((key) => {
@@ -27,7 +27,7 @@ export default class ProductPieGraph extends Component {
 		})
 
 		return groupedArray.map((product) => {
-        	return (
+			return (
 				<li 
 					key={product.product}
 					onClick={() => this.props.selectProduct(product)}
@@ -59,7 +59,7 @@ export default class ProductPieGraph extends Component {
 						{this.renderList()}
 					</ul>
 				</div>
-			);
+		);
 	}
 
 }

@@ -8,13 +8,13 @@ export default class ProductTable extends Component {
 		let filter = this.props.year ? this.props.year.year : "all";
 		console.log("Filter is" + filter);
 		return this.props.products.filter(product => {
-        	if (filter === 2013) return (product.year == 2013);
-        	if (filter === 2012) return (product.year == 2012);
-        	if (filter === 'all') return true;
-        	return product;
-      	})
-      	.map((product) => {
-        	return (
+			if (filter === 2013) return (product.year == 2013);
+			if (filter === 2012) return (product.year == 2012);
+			if (filter === 'all') return true;
+			return product;
+		})
+		.map((product) => {
+			return (
 				<li 
 					key={product.id}
 					onClick={() => this.props.selectProduct(product)}

@@ -13,8 +13,10 @@ export default class App extends Component {
   render() {
     return (
     	<div>
-    	    <h4>Revenue Dashboard</h4>
-    	    <hr/>
+    	    <header>
+    	    	<h2>React / Redux Revenue Dashboard</h2>
+    	    </header>
+    	    
       		<div>
       			<YearList />
       			<YearDetail />

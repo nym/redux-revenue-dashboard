@@ -2,16 +2,19 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { selectProduct } from '../actions/index';
 import { bindActionCreators } from 'redux';
+import ChartistGraph from 'react-chartist';
 
-let groupBy = function(xs, key) {
+// Based on stackoverflow groupBy reducer
+let revenueSumByKey = function(xs, key) {
 	return xs.reduce(function(rv, x) {
-		(rv[x[key]] = rv[x[key]] || []).push(x);
+		(rv[x[key]] = rv[x[key]] || 0);
+		rv[x[key]] = rv[x[key]] + x.revenue;
 		return rv;
 	}, {});
 };
 
 export default class ProductPieGraph extends Component {
-	renderList() {
+	aggregateProducts() {
 		let filter = this.props.year ? this.props.year.year : 'all';
 		let filtered = this.props.products.filter(product => {
 				if (filter === 2013) return (product.year == 2013);
@@ -19,32 +22,24 @@ export default class ProductPieGraph extends Component {
 				if (filter === 'all') return true;
 				return product;
 		});
-		let grouped = groupBy(filtered, "product");
+		let grouped = revenueSumByKey(filtered, "product");
+		console.log(grouped);
 		let groupedArray = [];
 		Object.keys(grouped).forEach((key) => {
 			let val = grouped[key];
-			groupedArray.push({product: key, data: val});
+			groupedArray.push({name: key, revenue: val});
 		})
+		return groupedArray;
+	}
 
-		return groupedArray.map((product) => {
+	renderList(aggregate) {
+		return aggregate.map((product) => {
 			return (
 				<li 
 					key={product.product}
-					onClick={() => this.props.selectProduct(product)}
+					onClick={() => this.props.selectProduct(product.name)}
 					className="list-group-item">
-					{product.product}
-				</li>
-				);
-
-		});
-
-		return this.props.products.map((product) => {
-			return (
-				<li 
-					key={product.id}
-					onClick={() => this.props.selectProduct(product)}
-					className="list-group-item">
-					{product.product}
+					{product.name}: ${product.revenue}
 				</li>
 				);
 
@@ -52,11 +47,45 @@ export default class ProductPieGraph extends Component {
 	}
 
 	render() {
+		let aggregate = this.aggregateProducts();
+		let labels = aggregate.map((product) => (product.name));
+		let series = aggregate.map((product) => (product.revenue));
+
+		let data = {
+		  labels: labels,
+		  series: series
+		};
+
+		let options = {
+		  labelInterpolationFnc: function(value) {
+		    return value[0]
+		  },
+		  height: "300px"
+		};
+
+		let responsiveOptions = [
+		  ['screen and (min-width: 640px)', {
+		    chartPadding: 0,
+		    labelOffset: 10,
+		    labelDirection: 'explode',
+		    labelInterpolationFnc: function(value) {
+		      return value;
+		    }
+		  }],
+		  ['screen and (min-width: 1024px)', {
+		    labelOffset: 80,
+		    chartPadding: 30
+		  }]
+		];
+
+
 		return (
-				<div className="col-xs-4">
-					<h5>Products</h5>
+				<div>
+					<div>
+						<ChartistGraph data={data} options={options} type={'Pie'} responsiveOptions={responsiveOptions} />
+					</div>
 					<ul className="list-group">
-						{this.renderList()}
+						{this.renderList(aggregate)}
 					</ul>
 				</div>
 		);

@@ -5,12 +5,18 @@ import { bindActionCreators } from 'redux';
 
 export default class ProductTable extends Component {
 	renderTable() {
-		let filter = this.props.year ? this.props.year.year : "all";
-		console.log("Filter is" + filter);
+		let yearFilter = this.props.year ? this.props.year.year : "all";
+		let productFilter = this.props.product ? this.props.product : "all";
+
 		return this.props.products.filter(product => {
-			if (filter === 2013) return (product.year == 2013);
-			if (filter === 2012) return (product.year == 2012);
-			if (filter === 'all') return true;
+			if (yearFilter === 2013) return (product.year == 2013);
+			if (yearFilter === 2012) return (product.year == 2012);
+			if (yearFilter === 'all') return true;
+			return product;
+		})
+		.filter(product => {
+			if (productFilter != 'all') return (product.product == productFilter);
+			if (productFilter == 'all') return true;
 			return product;
 		})
 		.map((product) => {
@@ -28,8 +34,8 @@ export default class ProductTable extends Component {
 	render() {
 		return (
 				<div className="col-xs-4">
-					<h5>Revenue Report{this.props.year ? ", " + this.props.year.year: ""}{this.props.product ? ", " + this.props.product.product: ""}</h5>
-					<table className="table table-sm table-bordered">
+					<h5>Revenue Report{this.props.year ? ", " + this.props.year.year: ""}{this.props.product ? ", " + this.props.product: ""}</h5>
+					<table className="table table-bordered">
 						  <thead>
 							<tr>
 							  <th>Country</th>
@@ -51,7 +57,8 @@ export default class ProductTable extends Component {
 function mapStateToProps(state) {
 	return {
 		products: state.products,
-		year: state.activeYear
+		year: state.activeYear,
+		product: state.activeProduct
 	};
 }
 

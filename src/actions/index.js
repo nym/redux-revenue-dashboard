@@ -8,7 +8,7 @@ export function selectBook(book) {
 }
 
 export function selectProduct(product) {
-	console.log("Product has been selected");
+	console.log("Product has been selected", product);
 	
 	return {
 		type: 'PRODUCT_SELECTED',

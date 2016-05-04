@@ -32,9 +32,9 @@ export default class YearList extends Component {
 	}	
 	render() {
 		return (
-				<div>
-					<h5>Year</h5>
-					<ul className="list-group col-sm-4">
+				<div className="col-sm-4">
+					<h5>Fiscal Year</h5>
+					<ul className="list-group">
 						{this.renderList()}
 					</ul>
 				</div>

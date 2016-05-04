@@ -6,13 +6,15 @@ export default class YearDetail extends Component {
 	render() {
 		if (!this.props.year) {
 			return (
-				<div className="col-xs-4">No active year</div>
+				<div className="col-xs-4">
+					<h5>Revenue by Product</h5>
+					<ProductPieGraph />
+				</div>
 			)
 		}
 		return (
 			<div className="col-xs-4">
-				Year: {this.props.year.year}
-
+				<h5>Revenue by Product, {this.props.year.year}</h5>
 				<ProductPieGraph />
 			</div>
 		);

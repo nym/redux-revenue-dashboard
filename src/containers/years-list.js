@@ -18,21 +18,9 @@ export default class YearList extends Component {
 		});
 	}
 
-	renderOptions() {
-		return this.props.years.map((year) => {
-			return (
-				<option 
-					value={year.year}
-					className="list-group-item">
-					{year.year}
-				</option>
-				);
-
-		});
-	}	
 	render() {
 		return (
-				<div className="col-xs-2">
+				<div className="col-md-2">
 					<h5>Fiscal Year</h5>
 					<ul className="list-group">
 						{this.renderList()}

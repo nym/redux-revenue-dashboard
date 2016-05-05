@@ -1,5 +1,4 @@
-import React from 'react';
-import { Component } from 'react';
+import React, { Component } from 'react';
 
 import BookList from '../containers/books-list.js';
 import YearList from '../containers/years-list.js';

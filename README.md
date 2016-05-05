@@ -1,25 +1,15 @@
-# ReduxSimpleStarter
+# React / Redux Revenue Dashboard
 
-Interested in learning [Redux](https://www.udemy.com/react-redux/)?
+This is a sample project that I built to learn Redux. It allows a user to filter by year as well as product. The dataset is 7k rows and is loaded fully into the browser instead of using a paginated API.
 
 ###Getting Started###
 
-There are two methods for getting started with this repo.
-
-####Familiar with Git?#####
-Checkout this repo, install depdencies, then start the gulp process with the following:
-
 ```
-	> git clone git@github.com:StephenGrider/ReduxSimpleStarter.git
-	> cd ReduxSimpleStarter
+	> cd redux-revenue-dashboard
 	> npm install
 	> npm start
 ```
 
-####Not Familiar with Git?#####
-Click [here](https://github.com/StephenGrider/ReactStarter/releases) then download the .zip file.  Extract the contents of the zip file, then open your terminal, change to the project directory, and:
+###Feedback?###
 
-```
-	> npm install
-	> npm start
-```
+I'm always looking to improve my code. Feel free to create an issue with any suggestions.

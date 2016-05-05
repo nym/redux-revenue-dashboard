@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { selectProduct } from '../actions/index';
 import { bindActionCreators } from 'redux';
+import ReactDOM from 'react-dom';
 import ChartistGraph from 'react-chartist';
 
 // Based on stackoverflow groupBy reducer
@@ -23,7 +24,6 @@ export default class ProductPieGraph extends Component {
 				return product;
 		});
 		let grouped = revenueSumByKey(filtered, "product");
-		console.log(grouped);
 		let groupedArray = [];
 		Object.keys(grouped).forEach((key) => {
 			let val = grouped[key];
@@ -74,16 +74,14 @@ export default class ProductPieGraph extends Component {
 		  }],
 		  ['screen and (min-width: 1024px)', {
 		    labelOffset: 80,
-		    chartPadding: 30
+		    chartPadding: 10
 		  }]
 		];
 
 
 		return (
 				<div>
-					<div>
-						<ChartistGraph data={data} options={options} type={'Pie'} responsiveOptions={responsiveOptions} />
-					</div>
+					<ChartistGraph data={data} options={options} type={'Pie'} responsive-options={responsiveOptions} />
 					<ul className="list-group">
 						{this.renderList(aggregate)}
 					</ul>

@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 
-import BookList from '../containers/books-list.js';
 import YearList from '../containers/years-list.js';
 import ProductTable from '../containers/products-table.js';
 
-import BookDetail from '../containers/book-detail.js';
 import YearDetail from '../containers/year-detail.js';
 
 
